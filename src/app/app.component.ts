@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HttpService } from './http.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ChackNorris';
+  joke:string='';
+  
+  constructor(private httpService: HttpService){}
+
+  getJoke(){
+    this.httpService.getData().subscribe(v => this.writeToJoke(v));
+  }
+
+  writeToJoke(obj:any){
+    this.joke = obj['value'];
+  }
 }
